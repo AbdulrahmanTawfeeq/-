@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0,
+    maximum-scale=1.0, user-scalable=0"
+    />
+    <title>وَاذْكُرْ رَبَّكَ</title>
+
+    <!-- <link rel="manifest" href="/manifest.json" /> -->
+    <!-- ios devices and safari browser support as it doesnot regonize the icons specified in manifest file -->
+    <!-- <link rel="apple-touch-icon" href="/images/72x72.png" />
+    <link rel="apple-touch-icon" href="/images/96x96.png" />
+    <link rel="apple-touch-icon" href="/images/128x128.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700" /> -->
+    <!-- will gonna override the value in json file -->
+    <!-- <meta name="theme-color" content="#317EFB" /> -->
+
+    <style>
+      html {
+        line-height: 1.15;
+        /* 1 */
+        -webkit-text-size-adjust: 100%;
+        /* 2 */
+      }
+
+      main {
+        display: block;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin: 0.67em 0;
+      }
+
+      button {
+        font-family: inherit;
+        /* 1 */
+        font-size: 100%;
+        /* 1 */
+        line-height: 1.15;
+        /* 1 */
+        margin: 0;
+        /* 2 */
+        overflow: visible;
+        -webkit-appearance: button;
+        text-transform: none;
+      }
+
+      button::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+      }
+
+      button:-moz-focusring {
+        outline: 1px dotted ButtonText;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: " Inter-Bold", "Inter", sans-serif;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        user-select: none;
+        color: var(--main-color3);
+      }
+      :root {
+        --rotate-button: 0deg;
+        --main-color1: #171717;
+        --main-color2: #126c96;
+        --main-color3: whitesmoke;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--main-color1);
+        overflow: hidden;
+        margin: 0 auto;
+        padding: 0;
+      }
+      nav {
+        height: 10%;
+        min-height: 64px;
+        padding: 5px;
+        background-color: var(--main-color2);
+        border: 0px solid #222;
+        justify-content: space-between;
+        flex-direction: row;
+      }
+      nav .logo {
+        height: 100%;
+        font-weight: 700;
+        font-size: 36px;
+        text-align: center;
+        justify-content: center;
+        flex-direction: row;
+      }
+      nav svg {
+        cursor: pointer;
+      }
+
+      nav svg:nth-of-type(2) {
+        display: none;
+      }
+
+      main {
+        height: 90%;
+        padding: 5px;
+        background-color: rgba(0, 0, 0, 0);
+        border: 0px solid #222;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .pray {
+        flex: 1;
+        flex-shrink: 0;
+        font-weight: 700;
+        font-size: 28px;
+        text-align: center;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .counter {
+        flex: 1;
+        padding: 10px;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .counter button,
+      .counter button::before {
+        padding: 10px;
+        outline: none;
+        border: none;
+        user-select: none;
+        width: 240px;
+        height: 240px;
+        background-color: var(--main-color2);
+        font-size: 66px;
+        border-radius: 100%;
+        -webkit-border-radius: 100%;
+        -moz-border-radius: 100%;
+        -ms-border-radius: 100%;
+        -o-border-radius: 100%;
+        position: relative;
+        cursor: pointer;
+      }
+      .counter button::before {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: -10px;
+        background: linear-gradient(
+          to bottom,
+          var(--main-color3) 0%,
+          var(--main-color1) 2.5%,
+          var(--main-color1) 97.5%,
+          var(--main-color3) 100%
+        );
+        z-index: -1;
+        transform: rotate(var(--rotate-button));
+        -webkit-transform: rotate(var(--rotate-button));
+        -moz-transform: rotate(var(--rotate-button));
+        -ms-transform: rotate(var(--rotate-button));
+        -o-transform: rotate(var(--rotate-button));
+      }
+      .counter svg,
+      .counter button::before,
+      .menu-items {
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+        -moz-transition: 0.3s;
+        -ms-transition: 0.3s;
+        -o-transition: 0.3s;
+        cursor: pointer;
+      }
+      .counter svg {
+        padding: 10px;
+      }
+      .counter svg:active + button {
+        font-size: 50px;
+      }
+      .menu-items {
+        width: 288px;
+        height: 90vh;
+        gap: 10px;
+        padding: 0 10px;
+        background-color: var(--main-color2);
+        overflow-y: auto;
+        border-top: 1px solid var(--main-color1);
+        position: absolute;
+        right: -288px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .show {
+        right: 0;
+      }
+      .menu-items > div:first-child {
+        font-size: 28px;
+        position: sticky;
+        top: -1px;
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        background-color: inherit;
+      }
+
+      .options {
+        height: auto;
+        padding: 5px 10px 5px 5px;
+        background-color: rgba(0, 0, 0, 0);
+        overflow: visible;
+        border-color: var(--main-color1);
+        border-style: solid;
+        border-width: 0 4px 0 0;
+        font-weight: 400;
+        font-size: 20px;
+        text-align: right;
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+      }
+
+      nav,
+      nav .logo,
+      main,
+      .pray,
+      .counter {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <svg
+        ontouchend="openFullscreen(this)"
+        id="maxi"
+        xmlns="http://www.w3.org/2000/svg"
+        enable-background="new 0 0 24 24"
+        height="24px"
+        viewBox="0 0 24 24"
+        width="50px"
+        fill="#FFFFFF"
+      >
+        <rect fill="none" height="24" width="50" />
+        <polygon
+          points="21,11 21,3 13,3 16.29,6.29 6.29,16.29 3,13 3,21 11,21 7.71,17.71 17.71,7.71"
+        />
+      </svg>
+
+      <svg
+        ontouchend="closeFullscreen(this)"
+        id="mini"
+        xmlns="http://www.w3.org/2000/svg"
+        enable-background="new 0 0 24 24"
+        height="24px"
+        viewBox="0 0 24 24"
+        width="50px"
+        fill="#FFFFFF"
+      >
+        <rect fill="none" height="24" width="50" />
+        <path
+          d="M22,3.41l-5.29,5.29L20,12h-8V4l3.29,3.29L20.59,2L22,3.41z M3.41,22l5.29-5.29L12,20v-8H4l3.29,3.29L2,20.59L3.41,22z"
+        />
+      </svg>
+      <h1 class="logo">وَاذْكُرْ رَبَّكَ</h1>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="54px"
+        viewBox="0 0 24 24"
+        width="50px"
+        fill="whitesmoke"
+      >
+        <path d="M0 0h24v24H0V0z" fill="none" />
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+      </svg>
+    </nav>
+
+    <div class="menu-items">
+      <div>الأذكار</div>
+      <div class="options">
+        لَا إلَه إلّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ
+        الْحَمْدُ وَهُوَ عَلَى كُلُّ شَيْءِ قَدِيرِ
+      </div>
+      <div class="options">
+        سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ
+      </div>
+      <div class="options">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ</div>
+      <div class="options">سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ</div>
+      <div class="options">
+        سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ
+      </div>
+      <div class="options">لا حَوْلَ وَلا قُوَّةَ إِلا بِاللَّهِ</div>
+      <div class="options">
+        الْلَّهُم صَلِّ وَسَلِم وَبَارِك عَلَى سَيِّدِنَا مُحَمَّد
+      </div>
+      <div class="options">أستغفر الله</div>
+      <div class="options">
+        سُبْحَانَ الْلَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا الْلَّهُ،
+        وَالْلَّهُ أَكْبَرُ
+      </div>
+    </div>
+
+    <main>
+      <section class="pray">
+        <p></p>
+      </section>
+      <section class="counter">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          enable-background="new 0 0 24 24"
+          height="70px"
+          viewBox="0 0 24 24"
+          width="70px"
+          fill="whitesmoke"
+        >
+          <g>
+            <rect fill="none" height="70" width="70" />
+            <rect fill="none" height="70" width="70" />
+            <rect fill="none" height="70" width="70" />
+          </g>
+          <path
+            d="M12,5V1L7,6l5,5V7c3.31,0,6,2.69,6,6s-2.69,6-6,6s-6-2.69-6-6H4c0,4.42,3.58,8,8,8s8-3.58,8-8S16.42,5,12,5z"
+          />
+        </svg>
+        <button>0</button>
+      </section>
+    </main>
+  </body>
+
+  <script>
+    document
+      .querySelector("nav svg:last-of-type")
+      .addEventListener("touchstart", () => {
+        document.querySelector("div.menu-items").classList.toggle("show");
+      });
+
+    document.querySelectorAll(".options").forEach((option) => {
+      option.addEventListener("click", (e) => {
+        document.querySelector(".pray>p").innerHTML =
+          e.currentTarget.textContent;
+        document.querySelectorAll(".options").forEach((option) => {
+          option.style.borderColor = "";
+        });
+        e.currentTarget.style.borderColor = "tomato";
+        document.querySelector("div.menu-items").classList.remove("show");
+      });
+    });
+
+    document.querySelectorAll(".options")[0].click();
+
+    let rotate = 0;
+
+    document
+      .querySelector(".counter svg")
+      .addEventListener("touchstart", (e) => {
+        document.querySelector(".counter button").textContent = 0;
+        rotate = rotate - 360;
+        e.currentTarget.style.transform = `rotate(${rotate}deg)`;
+      });
+
+    let rotate2 = 0;
+
+    document
+      .querySelector(".counter button")
+      .addEventListener("touchstart", (e) => {
+        e.currentTarget.textContent = parseInt(e.currentTarget.textContent) + 1;
+        rotate2 = rotate2 + 90;
+        document.documentElement.style.setProperty(
+          "--rotate-button",
+          `${rotate2}deg`
+        );
+      });
+
+    elem = document.documentElement;
+
+    function openFullscreen(target) {
+      let styles = () => {
+        target.style.display = "none";
+        document.getElementById("mini").style.display = "block";
+      };
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen().then(() => styles());
+      } else if (elem.webkitRequestFullscreen) {
+        /* Safari */
+        elem.webkitRequestFullscreen().then(() => styles());
+      } else if (elem.msRequestFullscreen) {
+        /* IE11 */
+        elem.msRequestFullscreen().then(() => styles());
+      }
+    }
+
+    function closeFullscreen(target) {
+      let styles = () => {
+        target.style.display = "none";
+        document.getElementById("maxi").style.display = "block";
+      };
+      if (document.exitFullscreen) {
+        document.exitFullscreen().then(() => styles());
+      } else if (document.webkitExitFullscreen) {
+        /* Safari */
+        document.webkitExitFullscreen().then(() => styles());
+      } else if (document.msExitFullscreen) {
+        /* IE11 */
+        document.msExitFullscreen().then(() => styles());
+      }
+    }
+  </script>
+</html>
